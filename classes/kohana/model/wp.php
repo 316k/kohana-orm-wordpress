@@ -8,7 +8,7 @@
  * @copyright  (c) 2012 Anh Nguyen
  * @license    
  */
-class Model_WP extends Kohana_Model_WP
+class Kohana_Model_WP extends ORM
 {
 	//protected $_db_group = '';
 }
