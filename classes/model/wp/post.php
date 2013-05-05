@@ -3,6 +3,13 @@ class Model_WP_Post extends Model_WP
 {
 	protected $_primary_key = 'ID';
 	protected $_table_name = 'posts';
+        
+        protected $_belongs_to = array(
+                'user' => array(
+                        'model' => 'wp_user',
+                        'foreign_key' => 'post_author'
+                    )                            
+        );
 
 	protected $_has_many = array(
 		'meta' => array(

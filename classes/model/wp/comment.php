@@ -3,12 +3,22 @@ class Model_WP_Comment extends Model_WP
 {
 	protected $_primary_key = 'comment_ID';
 	protected $_table_name = 'comments';
+        
+        protected $_belongs_to = array(
+                'user' => array(
+                        'model' => 'wp_user'
+                )
+        );
 	
 	protected $_has_many = array(
 		'meta' => array(
 			'model' => 'wp_commentmeta',
 			'foreign_key' => 'comment_id',
 		),
+                'comments' => array(
+                        'model' => 'wp_comment',
+                        'foreign_key' => 'comment_parent'
+                )
 	);
 	
 	public function add_meta($key, $value)
