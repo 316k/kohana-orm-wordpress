@@ -8,7 +8,11 @@ class Model_WP_Post extends Model_WP
                 'user' => array(
                         'model' => 'wp_user',
                         'foreign_key' => 'post_author'
-                    )                            
+                    ),
+                'post' => array(
+                        'model' => 'wp_post',
+                        'foreign_key' => 'post_parent'
+                )
         );
 
 	protected $_has_many = array(
@@ -26,6 +30,10 @@ class Model_WP_Post extends Model_WP
 			'foreign_key' => 'object_id',
 			'far_key' => 'term_taxonomy_id',
 		),
+                'posts' => array(
+                        'model' => 'wp_post',
+                        'foreign_key' => 'post_parent'
+                ),
 	);
 	
 	public function slug($slug)
