@@ -6,7 +6,7 @@ class Model_WP_Postmeta extends Model_WP
 	
 	protected $_belongs_to = array(
 		'post' => array(
-			'model' => 'Wp_Post',
+			'model' => 'WP_Post',
 		)
 	);
 	

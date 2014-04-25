@@ -6,7 +6,7 @@ class Model_WP_Comment extends Model_WP
         
         protected $_belongs_to = array(
                 'user' => array(
-                        'model' => 'Wp_User'
+                        'model' => 'WP_User'
                 )
         );
 	
@@ -16,18 +16,18 @@ class Model_WP_Comment extends Model_WP
 			'foreign_key' => 'comment_id',
 		),
                 'comments' => array(
-                        'model' => 'Wp_Comment',
+                        'model' => 'WP_Comment',
                         'foreign_key' => 'comment_parent'
                 )
 	);
 	
 	public function add_meta($key, $value)
 	{
-		$meta = ORM::factory('Wp_Commentmeta');
+		$meta = ORM::factory('WP_Commentmeta');
 		
 		if($meta->exists($this->pk(), $key))
 		{
-			$meta = ORM::factory('Wp_Commentmeta')
+			$meta = ORM::factory('WP_Commentmeta')
 				->where('comment_id', $this->pk())
 				->and_where('meta_key', '=', $key)
 				->find()

@@ -6,32 +6,32 @@ class Model_WP_Post extends Model_WP
 
         protected $_belongs_to = array(
                 'user' => array(
-                        'model' => 'Wp_User',
+                        'model' => 'WP_User',
                         'foreign_key' => 'post_author'
                     ),
                 'post' => array(
-                        'model' => 'Wp_Post',
+                        'model' => 'WP_Post',
                         'foreign_key' => 'post_parent'
                 )
         );
 
 	protected $_has_many = array(
 		'meta' => array(
-			'model' => 'Wp_Postmeta',
+			'model' => 'WP_Postmeta',
 			'foreign_key' => 'post_id',
 		),
 		'comments' => array(
-			'model' => 'Wp_Comment',
+			'model' => 'WP_Comment',
 			'foreign_key' => 'comment_post_ID',
 		),
 		'terms' => array(
-			'model' => 'Wp_Term',
+			'model' => 'WP_Term',
 			'through' => 'wp_term_relationships',
 			'foreign_key' => 'object_id',
 			'far_key' => 'term_taxonomy_id',
 		),
                 'posts' => array(
-                        'model' => 'Wp_Post',
+                        'model' => 'WP_Post',
                         'foreign_key' => 'post_parent'
                 ),
 	);
@@ -49,11 +49,11 @@ class Model_WP_Post extends Model_WP
 
 	public function add_meta($key, $value)
 	{
-		$meta = ORM::factory('Wp_Postmeta');
+		$meta = ORM::factory('WP_Postmeta');
 		
 		if($meta->exists($this->pk(), $key))
 		{
-			$meta = ORM::factory('Wp_Postmeta')
+			$meta = ORM::factory('WP_Postmeta')
 				->where('post_id','=', $this->pk())
 				->and_where('meta_key','=', $key)
 				->find()
@@ -104,13 +104,13 @@ class Model_WP_Post extends Model_WP
 	
 	public function add_taxonomy($item, $type, $order = 0)
 	{
-		$term = ORM::factory('Wp_Term')
+		$term = ORM::factory('WP_Term')
 			->where('name','=',$item)
 			->or_where('slug', '=', $item)
 			->find()
 		;
 		
-		$taxonomy = ORM::factory('Wp_Term_Taxonomy')
+		$taxonomy = ORM::factory('WP_Term_Taxonomy')
 			->where('term_id','=', $term->pk())
 			->and_where('taxonomy','=', $type)
 			->find()
@@ -118,7 +118,7 @@ class Model_WP_Post extends Model_WP
 
 		if($taxonomy->loaded())
 		{
-			$relationship = ORM::factory('Wp_Term_Relationship');
+			$relationship = ORM::factory('WP_Term_Relationship');
 			$relationship->object_id = $this->pk();
 			$relationship->term_taxonomy_id = $taxonomy->pk();
 			$relationship->term_order = $order;
@@ -132,13 +132,13 @@ class Model_WP_Post extends Model_WP
 	
 	public function has_taxonomy($item, $type)
 	{
-		$term = ORM::factory('Wp_Term')
+		$term = ORM::factory('WP_Term')
 			->where('name','=',$item)
 			->or_where('slug', '=', $item)
 			->find()
 		;
 		
-		$taxonomy = ORM::factory('Wp_Term_Taxonomy')
+		$taxonomy = ORM::factory('WP_Term_Taxonomy')
 			->where('term_id','=', $term->pk())
 			->and_where('taxonomy','=', $type)
 			->find()
@@ -151,13 +151,13 @@ class Model_WP_Post extends Model_WP
 	{
 		if($this->has_taxonomy($item, $type))
 		{
-			$term = ORM::factory('Wp_Term')
+			$term = ORM::factory('WP_Term')
 				->where('name','=',$item)
 				->or_where('slug', '=', $item)
 				->find()
 			;
 
-			$taxonomy = ORM::factory('Wp_Term_Taxonomy')
+			$taxonomy = ORM::factory('WP_Term_Taxonomy')
 				->where('term_id','=', $term->pk())
 				->and_where('taxonomy','=', $type)
 				->find()

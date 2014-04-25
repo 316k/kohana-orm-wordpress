@@ -6,7 +6,7 @@ class Model_WP_Link extends Model_WP
 	
 	protected $_belongs_to = array(
 		'user' => array(
-			'model' => 'Wp_User',
+			'model' => 'WP_User',
 			'foreign_key' => 'link_owner',
 		),
 	);

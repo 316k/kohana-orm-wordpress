@@ -6,7 +6,7 @@ class Model_WP_Term_Taxonomy extends Model_WP
 	
 	public function recount_relationships()
 	{
-		$statistics = ORM::factory('Wp_Term_Relationship')
+		$statistics = ORM::factory('WP_Term_Relationship')
 			->select(array('term_taxonomy_id','id'),array(DB::expr('COUNT(*)'),'count'))
 			->group_by('term_taxonomy_id')
 			->find_all()
@@ -14,7 +14,7 @@ class Model_WP_Term_Taxonomy extends Model_WP
 
 		foreach($statistics as $term_id => $count)
 		{
-			$term = ORM::factory('Wp_Term_Taxonomy', $term_id);
+			$term = ORM::factory('WP_Term_Taxonomy', $term_id);
 			$term->count = $count;
 			$term->save();
 		}

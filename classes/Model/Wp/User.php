@@ -6,15 +6,15 @@ class Model_WP_User extends Model_WP
 	
 	protected $_has_many = array(
 		'posts' => array(
-			'model' => 'Wp_Post',
+			'model' => 'WP_Post',
 			'foreign_key' => 'post_author',
 		),
 		'comments' => array(
-			'model' => 'Wp_Comment',
+			'model' => 'WP_Comment',
 			'foreign_key' => 'user_id',
 		),
 		'links' => array(
-			'model' => 'Wp_Link',
+			'model' => 'WP_Link',
 			'foreign_key' => 'link_owner',
 		),
 	);
@@ -22,11 +22,11 @@ class Model_WP_User extends Model_WP
 	public function add_meta($key, $value)
 	{
 		
-		$meta = ORM::factory('Wp_Usermeta');
+		$meta = ORM::factory('WP_Usermeta');
 		
 		if($meta->exists($this->pk(), $key))
 		{
-			$meta = ORM::factory('Wp_Usermeta')
+			$meta = ORM::factory('WP_Usermeta')
 				->where('user_id', $this->pk())
 				->and_where('meta_key', '=', $key)
 				->find()

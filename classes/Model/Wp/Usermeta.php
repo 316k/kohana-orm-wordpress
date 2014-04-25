@@ -10,6 +10,6 @@ class Model_WP_Usermeta extends Model_WP
 			->where('user_id','=', $user_id)
 			->and_where('meta_key','=', $key)
 			->count_all()
-		;				
+		;
 	}
 }

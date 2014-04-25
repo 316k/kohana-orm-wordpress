@@ -5,13 +5,13 @@ class Model_WP_Term extends Model_WP
 	
 	protected $_has_many = array(
 		'posts' => array(
-			'model' => 'Wp_Post',
+			'model' => 'WP_Post',
 			'through' => 'wp_term_relationships',
 			'foreign_key' => 'term_taxonomy_id',
 			'far_key' => 'object_id',
 		),
 		'term_taxonomy' => array(
-			'model' => 'Wp_Term_Taxonomy',
+			'model' => 'WP_Term_Taxonomy',
 		)
 	);
 }
