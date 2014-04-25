@@ -2,32 +2,32 @@
 class Model_WP_Comment extends Model_WP
 {
 	protected $_primary_key = 'comment_ID';
-	protected $_table_name = 'comments';
+	protected $_table_name = 'wp_comments';
         
         protected $_belongs_to = array(
                 'user' => array(
-                        'model' => 'wp_user'
+                        'model' => 'Wp_User'
                 )
         );
 	
 	protected $_has_many = array(
 		'meta' => array(
-			'model' => 'wp_commentmeta',
+			'model' => 'Wp_Commentmeta',
 			'foreign_key' => 'comment_id',
 		),
                 'comments' => array(
-                        'model' => 'wp_comment',
+                        'model' => 'Wp_Comment',
                         'foreign_key' => 'comment_parent'
                 )
 	);
 	
 	public function add_meta($key, $value)
 	{
-		$meta = ORM::factory('wp_commentmeta');
+		$meta = ORM::factory('Wp_Commentmeta');
 		
 		if($meta->exists($this->pk(), $key))
 		{
-			$meta = ORM::factory('wp_commentmeta')
+			$meta = ORM::factory('Wp_Commentmeta')
 				->where('comment_id', $this->pk())
 				->and_where('meta_key', '=', $key)
 				->find()

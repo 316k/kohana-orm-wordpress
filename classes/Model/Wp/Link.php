@@ -2,11 +2,11 @@
 class Model_WP_Link extends Model_WP
 {
 	protected $_primary_key = 'link_id';
-	protected $_table_name = 'links';
+	protected $_table_name = 'wp_links';
 	
 	protected $_belongs_to = array(
 		'user' => array(
-			'model' => 'wp_user',
+			'model' => 'Wp_User',
 			'foreign_key' => 'link_owner',
 		),
 	);

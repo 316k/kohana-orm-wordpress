@@ -2,11 +2,11 @@
 class Model_WP_Postmeta extends Model_WP
 {
 	protected $_primary_key = 'meta_id';
-	protected $_table_name = 'postmeta';
+	protected $_table_name = 'wp_postmeta';
 	
 	protected $_belongs_to = array(
 		'post' => array(
-			'model' => 'wp_post',
+			'model' => 'Wp_Post',
 		)
 	);
 	
